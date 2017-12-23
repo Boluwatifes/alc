@@ -1,0 +1,19 @@
+version: '3'
+services:
+  web:
+    image: node-web-app
+    build: ./webapp
+    command: node server.js
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./webapp:/usr/src/app
+      - /usr/src/node_modules
+    depends_on:
+      - "mongo"
+
+  mongo:
+    image: "mongo"
+    build: ./mongo
+    ports:
+      - "27017:27017"
